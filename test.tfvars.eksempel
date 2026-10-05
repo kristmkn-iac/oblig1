@@ -1,0 +1,49 @@
+# =============================================================================
+#  dev.tfvars.eksempel  –  fila som ALDRI skal ligge i repoet
+# -----------------------------------------------------------------------------
+#  Legg merke til filnavnet. Den heter .eksempel, ikke .tfvars, nettopp fordi
+#  .gitignore stopper alt som heter *.tfvars – og det er den regelen K5 måler:
+#
+#      git log --all --diff-filter=A --name-only -- '*.tfvars'
+#      -> skal være tom
+#
+#  Den ekte fila lager du lokalt som dev.tfvars, laster opp til Key Vault, og
+#  lar Git aldri se:
+#
+#      ./set-tfvars-secret.sh <kv-navn> tfvars-dev  ./dev.tfvars
+#      ./set-tfvars-secret.sh <kv-navn> tfvars-test ./test.tfvars
+#
+#  Workflowen henter den ned igjen som params.auto.tfvars. Navnet er ikke
+#  tilfeldig: alt som heter *.auto.tfvars leses automatisk av Terraform, uten
+#  -var-file.
+# -----------------------------------------------------------------------------
+#  Hele forskjellen mellom dev og test ligger i denne fila. Koden er identisk.
+# =============================================================================
+ 
+shortname = "kristmkn"
+ 
+project = "oblig1"
+ 
+# Miljønavnet er en VERDI her, ikke et mappenavn. Det er hele K6 på én linje.
+# I test-varianten står det "test", og ingenting annet endrer seg.
+environment = "test"
+ 
+location = "norwayeast"
+ 
+address_space = "10.20.0.0/16"
+ 
+# navn => netnum. Nøkkelen er identiteten, netnum er adressen.
+subnets = {
+  web  = 0
+  app  = 1
+  data = 2
+}
+
+# App-stack
+vm_size       = "Standard_B1s"
+vm_subnet_key = "app"
+
+backend_resource_group_name  = "rg-tfstate-kristmkn"
+backend_storage_account_name = "sttfkristmknhukoqv"
+backend_container_name       = "tfstate"
+nettverk_state_key           = "env/test/nettverk.tfstate"
