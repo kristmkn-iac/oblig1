@@ -1,14 +1,4 @@
-# =============================================================================
-#  stacks/nettverk/outputs.tf
-# -----------------------------------------------------------------------------
-#  Outputs har fått en ny leser i modul 5. I Oppgave 4 var de et grensesnitt
-#  mot app-stacken. Nå leses de også av WORKFLOWEN – verifiseringssteget
-#  henter resource_group_name og vnet_name med `terraform output -raw`.
-#
-#  Det gjør dem til et API med to konsumenter. Døper du en av dem om, feiler
-#  ikke stacken din; det er den ANDRE stacken og verifiseringssteget som
-#  ryker.
-# =============================================================================
+#stacks/nettverk/outputs.tf
 
 output "subnet_ids" {
   value       = module.network.subnet_ids

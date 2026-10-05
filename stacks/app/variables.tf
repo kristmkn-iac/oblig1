@@ -1,3 +1,5 @@
+#stacks/app/variables.tf
+
 variable "shortname" {
   type        = string
   description = "Ditt eget kortnavn. Går inn i alle ressursnavn."
@@ -10,7 +12,7 @@ variable "project" {
 
 variable "environment" {
   type        = string
-  description = "Miljønavn: dev, test eller prod."
+  description = "Miljønavn: dev eller test."
 }
 
 variable "location" {
@@ -49,13 +51,6 @@ variable "admin_password" {
   TEKST
 }
 
-# ---------------------------------------------------------------------------
-#  Backend-adressen til den ANDRE stacken.
-#
-#  Disse er variabler og ikke hardkodet, slik at main.tf kan være identisk i
-#  dev og prod. Verdiene står i terraform.tfvars, og de er de samme som i
-#  shared/backend.hcl – bortsett fra nettverk_state_key, som er ulik per miljø.
-# ---------------------------------------------------------------------------
 variable "backend_resource_group_name" {
   type        = string
   description = "Ressursgruppa state-lagringen ligger i. Fra backend-bootstrap."

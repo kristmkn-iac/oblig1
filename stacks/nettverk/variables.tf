@@ -1,13 +1,4 @@
-# =============================================================================
-#  stacks/nettverk/variables.tf
-# -----------------------------------------------------------------------------
-#  Ingen av variablene har default. Det er et bevisst valg: mangler en verdi,
-#  skal kjøringen stoppe med en tydelig feil i stedet for å rulle ut noe som
-#  ligner på riktig miljø.
-#
-#  Med TF_INPUT: false i workflowen feiler Terraform umiddelbart i stedet for
-#  å bli stående og vente på et svar ingen kan gi den.
-# =============================================================================
+#stacks/nettverk/variables.tf
 
 variable "shortname" {
   type        = string
@@ -24,8 +15,8 @@ variable "environment" {
   description = "Miljønavn: dev eller test. Kommer fra parameterfila, ikke fra mappenavnet."
 
   validation {
-    condition     = contains(["dev", "test", "prod"], var.environment)
-    error_message = "environment må være dev, test eller prod."
+    condition     = contains(["dev", "test"], var.environment)
+    error_message = "environment må være dev eller test."
   }
 }
 

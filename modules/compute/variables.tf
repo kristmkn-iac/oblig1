@@ -1,6 +1,4 @@
-# =============================================================================
-#  modules/compute/variables.tf
-# =============================================================================
+#modules/compute/variables.tf
  
 variable "rg_name" {
   type        = string
@@ -30,12 +28,6 @@ variable "vm_size" {
   description = "VM-SKU, f.eks. Standard_B2as_v2. Se lista over tillatte SKU-er i oppgaven."
  
   validation {
-    # Lista over tillatte SKU-er i tenanten vår er kjent og endelig, så vi kan
-    # fange en ugyldig verdi allerede ved `plan` – i stedet for at Azure
-    # avviser den midt i en `apply`.
-    #
-    # De to SKU-ene med "al" i navnet er utelatt med vilje: de er ARM-baserte
-    # og krever et ARM-image, mens vi bruker et vanlig x86-64-image.
     condition = contains([
       "Standard_B2as_v2", "Standard_B4as_v2",
       "Standard_D2s_v5", "Standard_D4s_v5",
